@@ -1,0 +1,37 @@
+CREATE TABLE products (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    description TEXT,
+    price DECIMAL(10, 2),
+    supplier_id INT, 
+    CONSTRAINT fk_supplier_id 
+      FOREIGN KEY (supplier_id)
+      REFERENCES suppliers(id)
+);
+
+CREATE TABLE suppliers (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    contact_name VARCHAR(255),
+    contact_email VARCHAR(255),
+    contact_phone VARCHAR(255),
+);
+
+CREATE TABLE inventory (
+    id INT PRIMARY KEY,
+    product_id INT,
+    quantity INT,
+    CONSTRAINT fk_products_id
+      FOREIGN KEY (product_id)
+      REFERENCES products(id)
+);
+
+CREATE TABLE sales (
+    id INT PRIMARY KEY,
+    product_id INT,
+    quantity INT,
+    sale_date DATE,
+    CONSTRAINT fk_product_id
+        FOREIGN KEY (product_id)
+        REFERENCES products(id)
+);
